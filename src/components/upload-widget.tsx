@@ -3,7 +3,7 @@ import * as Collapsible from "@radix-ui/react-collapsible";
 import { useState } from "react";
 import { UploadWidgetDropzone } from "./upload-widget-dropzone";
 import { UploadWidgetHeader } from "./upload-widget-header";
-import { UploadWidgetMinimizedButton } from "./upload-widget-minimidez-button";
+import { UploadWidgetMinimizedButton } from "./upload-widget-minimized-button";
 import { UploadWidgetUploadList } from "./upload-widget-upload-list";
 
 export function UploadWidget() {
@@ -11,7 +11,7 @@ export function UploadWidget() {
 
   return (
     <Collapsible.Root onOpenChange={setIsWidgetOpen}>
-      <div className="w-full max-w-90 overflow-hidden rounded-xl bg-zinc-900 shadow-shape">
+      <div className="w-90 overflow-hidden rounded-xl bg-zinc-900 shadow-shape">
         {!isWidgetOpen && <UploadWidgetMinimizedButton />}
 
         <Collapsible.Content>
