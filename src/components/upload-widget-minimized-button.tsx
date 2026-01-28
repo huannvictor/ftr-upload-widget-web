@@ -4,7 +4,7 @@ import { UploadWidgetTitle } from "./upload-widget-title";
 
 export function UploadWidgetMinimizedButton() {
   return (
-    <Trigger className="group flex w-full items-center justify-between bg-white/2 px-5 py-3">
+    <Trigger className="group flex w-full items-center justify-between gap-5 bg-white/2 px-5 py-3">
       <UploadWidgetTitle />
 
       <Maximize2
