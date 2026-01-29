@@ -1,10 +1,11 @@
+import { motion } from "motion/react";
 import { UploadWidgetUploadItem } from "./upload-widget-upload-item";
 
 export function UploadWidgetUploadList() {
-  const isUploadListEmpty = true;
+  const isUploadListEmpty = false;
 
   return (
-    <div className="flex flex-col gap-3 px-3">
+    <motion.div className="flex flex-col gap-3 px-3">
       <span className="font-medium text-xs">
         Uploaded files <span className="text-zinc-400">(2)</span>
       </span>
@@ -17,6 +18,6 @@ export function UploadWidgetUploadList() {
           <UploadWidgetUploadItem />
         </div>
       )}
-    </div>
+    </motion.div>
   );
 }

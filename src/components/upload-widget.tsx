@@ -19,7 +19,7 @@ export function UploadWidget() {
             width: "max-content",
             height: 44,
             transition: {
-              type: "keyframes",
+              type: "inertia",
             },
           },
           open: {
