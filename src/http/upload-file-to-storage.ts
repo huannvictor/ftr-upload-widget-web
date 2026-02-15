@@ -1,10 +1,17 @@
 import axios from "axios";
 
-type uploadFileToStorageParams = {
+type UploadFileToStorageParams = {
   file: File;
 };
 
-export async function uploadFileToStorage({ file }: uploadFileToStorageParams) {
+type UploadFileToStorageOpts = {
+  signal?: AbortSignal;
+};
+
+export async function uploadFileToStorage(
+  { file }: UploadFileToStorageParams,
+  opts?: UploadFileToStorageOpts
+) {
   const data = new FormData();
   data.append("file", file);
 
@@ -15,6 +22,7 @@ export async function uploadFileToStorage({ file }: uploadFileToStorageParams) {
       headers: {
         "Content-Type": "multipart/form-data",
       },
+      signal: opts?.signal,
     }
   );
 
