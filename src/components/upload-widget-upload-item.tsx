@@ -16,6 +16,10 @@ export function UploadWidgetUploadItem({
 }: UploadWidgetUploadItemProps) {
   const cancelUpload = useUploads((store) => store.cancelUploads);
 
+  const progress = Math.min(
+    Math.round((upload.uploadSizeInBytes * 100) / upload.originalSizeInBytes)
+  );
+
   return (
     <motion.div
       animate={{ opacity: 1 }}
@@ -29,7 +33,9 @@ export function UploadWidgetUploadItem({
           <span className="w-20 truncate">{upload.name}</span>
         </span>
         <span className="flex items-center gap-1.5 text-xxs text-zinc-400">
-          <span className="line-through">{formatBytes(upload.file.size)}</span>
+          <span className="line-through">
+            {formatBytes(upload.originalSizeInBytes)}
+          </span>
           <div className="size-1 rounded-full bg-zinc-700" />
           <span>
             300 KB
@@ -37,7 +43,7 @@ export function UploadWidgetUploadItem({
           </span>
           <div className="size-1 rounded-full bg-zinc-700" />
           {upload.status === "success" && <span>100%</span>}
-          {upload.status === "progress" && <span>45%</span>}
+          {upload.status === "progress" && <span>{progress}%</span>}
           {upload.status === "error" && (
             <span className="text-rose-400">Error</span>
           )}
@@ -53,7 +59,9 @@ export function UploadWidgetUploadItem({
       >
         <ProgressIndicator
           className="h-1 bg-indigo-500 group-data-[status=cancelled]:bg-orange-400 group-data-[status=error]:bg-rose-400 group-data-[status=success]:bg-emerald-400"
-          style={{ width: upload.status === "progress" ? "43%" : "100%" }}
+          style={{
+            width: upload.status === "progress" ? `${progress}%` : "100%",
+          }}
         />
       </Progress>
 

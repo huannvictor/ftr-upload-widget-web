@@ -9,6 +9,8 @@ export type Upload = {
   name: string;
   file: File;
   status: "progress" | "success" | "error" | "cancelled";
+  originalSizeInBytes: number;
+  uploadSizeInBytes: number;
 };
 
 type UploadState = {
@@ -27,7 +29,17 @@ export const useUploads = create<UploadState>()(
 
       try {
         await uploadFileToStorage(
-          { file: upload.file },
+          {
+            file: upload.file,
+            onProgress(sizeInBytes) {
+              set((state) => {
+                state.uploads.set(uploadId, {
+                  ...upload,
+                  uploadSizeInBytes: sizeInBytes,
+                });
+              });
+            },
+          },
           { signal: upload.abortController.signal }
         );
 
@@ -73,6 +85,8 @@ export const useUploads = create<UploadState>()(
           name: file.name,
           file,
           status: "progress",
+          originalSizeInBytes: file.size,
+          uploadSizeInBytes: 0,
         };
 
         set((state) => {
